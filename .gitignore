@@ -1,0 +1,4 @@
+myenv/
+office_emp_proj/emp_app/__pycache__
+office_emp_proj/emp_app/migrations/__pycache__
+office_emp_proj/office_emp_proj/__pycache__
