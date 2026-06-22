@@ -3,46 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css" integrity="sha384-CfCrinSRH2IR6a4e6fy2q6ioOX7O6Mtm1L9vRvFZ1trBncWmMePhzvafv7oIcWiW" crossorigin="anonymous">
-    <title>View All Employee</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+    <title>View All Employees</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#f4f7fc,#e9eef8);
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding:30px 15px;
+        }
+
+        .main-card{
+            max-width:1400px;
+            margin:auto;
+            background:#fff;
+            border-radius:24px;
+            padding:35px;
+            box-shadow:0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .header-section{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .header-section h1{
+            font-size:2.5rem;
+            font-weight:700;
+            color:#1f2937;
+            margin-bottom:10px;
+        }
+
+        .header-section p{
+            color:#6b7280;
+            margin-bottom:15px;
+        }
+
+        .divider{
+            width:80px;
+            height:4px;
+            background:#0d6efd;
+            border-radius:10px;
+            margin:auto;
+        }
+
+        .table-container{
+            margin-top:30px;
+            overflow-x:auto;
+            border-radius:18px;
+        }
+
+        .custom-table{
+            margin-bottom:0;
+            min-width:1100px;
+            vertical-align:middle;
+        }
+
+        .custom-table thead{
+            background:#0d6efd;
+            color:#fff;
+        }
+
+        .custom-table thead th{
+            border:none;
+            padding:16px;
+            font-weight:600;
+            white-space:nowrap;
+        }
+
+        .custom-table tbody tr{
+            transition:all 0.2s ease;
+        }
+
+        .custom-table tbody tr:hover{
+            background:#f8faff;
+        }
+
+        .custom-table td,
+        .custom-table th{
+            padding:14px;
+            white-space:nowrap;
+        }
+
+        .custom-table tbody td{
+            color:#374151;
+        }
+
+        .employee-id{
+            font-weight:600;
+            color:#0d6efd;
+        }
+
+        .record-count{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+
+        .badge-custom{
+            background:#e8f1ff;
+            color:#0d6efd;
+            padding:10px 16px;
+            border-radius:10px;
+            font-weight:600;
+        }
+
+        @media (max-width:768px){
+
+            .main-card{
+                padding:25px 18px;
+            }
+
+            .header-section h1{
+                font-size:2rem;
+            }
+        }
+
+        @media (max-width:480px){
+
+            .header-section h1{
+                font-size:1.7rem;
+            }
+
+            .main-card{
+                padding:20px 15px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>
-            All Employee details 
-        </h1>
-        <table class="table table-dark table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First Name </th>
-      <th scope="col">Last Name </th>
-      <th scope="col">Salary</th>
-      <th scope="col">Bonus</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Role</th>
-      <th scope="col">Department</th>
-      <th scope="col">Location</th>
-      <th scope="col">Hire Date</th>
-    </tr>
-  </thead>
-        {% for emp in emps%}
-  <tbody>
-    <tr>
-      <th scope="row">{{emp.id}}</th>
-      <td>{{emp.first_name}}</td>
-      <td>{{emp.last_name}}</td>
-      <td>{{emp.salary}}</td>
-      <td>{{emp.bonus}}</td>
-      <td>{{emp.phone}}</td>
-      <td>{{emp.role.name}}</td>
-      <td>{{emp.dept.name}}</td>
-      <td>{{emp.dept.location}}</td>
-      <td>{{emp.hire_date}}</td>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
+
+<div class="main-card">
+
+    <div class="header-section">
+        <h1>Employee Directory</h1>
+        <p>View and manage all employee records in one place.</p>
+        <div class="divider"></div>
     </div>
+
+    <div class="record-count">
+        <h5 class="mb-0">Employee Records</h5>
+        <span class="badge-custom">
+            Total Employees: {{ emps|length }}
+        </span>
+    </div>
+
+    <div class="table-container">
+        <table class="table custom-table table-hover">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Salary</th>
+                    <th>Bonus</th>
+                    <th>Phone Number</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                    <th>Hire Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for emp in emps %}
+                <tr>
+                    <td class="employee-id">{{ emp.id }}</td>
+                    <td>{{ emp.first_name }}</td>
+                    <td>{{ emp.last_name }}</td>
+                    <td>₹{{ emp.salary }}</td>
+                    <td>₹{{ emp.bonus }}</td>
+                    <td>{{ emp.phone }}</td>
+                    <td>{{ emp.role.name }}</td>
+                    <td>{{ emp.dept.name }}</td>
+                    <td>{{ emp.dept.location }}</td>
+                    <td>{{ emp.hire_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
 </body>
 </html>
