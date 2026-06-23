@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Employee, Role, Department
 from datetime import datetime
 from django.db.models import Q
@@ -27,18 +27,26 @@ def add_emp(request):
         salary = int(request.POST['salary'])
         bonus = int(request.POST['bonus'])
         phone = int(request.POST['phone'])
-        dept = int(request.POST['dept'])
-        role = int(request.POST['role'])
+        dept = request.POST['dept']
+        role = request.POST['role']
         # Using Query set 
         new_emp = Employee(first_name=first_name, last_name=last_name, salary=salary, bonus=bonus, phone=phone, dept_id=dept, role_id= role, hire_date= datetime.now())
         # Saving it in model 
         new_emp.save()
 
 
-        return HttpResponse("Employee added successfully")
+        return redirect('all_emp')
 
     elif(request.method == "GET"):
-         return render(request, 'add_emp.html')
+         departments = Department.objects.all()
+         roles = Role.objects.all()
+
+         context = {
+            'departments': departments,
+            'roles': roles
+            }
+
+         return render(request, 'add_emp.html', context)
     
     else:
         return HttpResponse("An exception occured")
@@ -48,10 +56,10 @@ def remove_emp(request, emp_id = 0):
         try:
             emp_to_be_removed = Employee.objects.get(id=emp_id)
             emp_to_be_removed.delete()
-            return HttpResponse("Employee Removed Successfully")
-        except:
+            return redirect('remove_emp')
+        except Employee.DoesNotExist:
             return HttpResponse("Please enter valid emp ID")
-    emps = Employee.objects.all()
+    emps = Employee.objects.all().order_by('id')
     context = {
         'emps':emps
     }
