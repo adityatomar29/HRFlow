@@ -19,7 +19,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'), # Need to create index function in views file
+    path('', views.home, name='home'), # Need to create index function in views file
+    path('index', views.index, name='index'), # Need to create index function in views file
     path('all_emp', views.all_emp, name='all_emp'),
     path('add_emp', views.add_emp , name='add_emp'),
     path('remove_emp', views.remove_emp , name='remove_emp'),
