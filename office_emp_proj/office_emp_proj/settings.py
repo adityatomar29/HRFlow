@@ -117,7 +117,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = '/home/your_pythonanywhere_username/static/' # For deployment
+STATIC_ROOT = '/home/aditya29/static/' # For deployment
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
