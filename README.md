@@ -60,8 +60,8 @@ office_emp_proj/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/employee-management-system.git
-cd employee-management-system
+git clone https://github.com/adityatomar29/HRFlow.git
+cd office_emp_proj
 ```
 
 ### 2. Create Virtual Environment
