@@ -4,7 +4,7 @@ A robust Employee Management System built with Django that streamlines employee 
 
 ## 🚀 Live Demo
 
-🔗 **Deployed Application:** https://aditya29pythonanywhere.com
+🔗 **Deployed Application:** https://aditya29.pythonanywhere.com
 
 ---
 
